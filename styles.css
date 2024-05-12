@@ -1,0 +1,155 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: QuireSans;
+    src: url(fonts/QuireSans.ttf);
+}
+
+:root {
+    --colorBody: #E5E5E5;
+    --ff: QuireSans;
+    --color: #4E4E4E;
+    --buttonColor: #2CD889;
+}
+
+body {
+    background-color: var(--colorBody);
+    font-family: var(--ff);
+    color: var(--color);
+    font-size: 16px;
+
+}
+
+.body {
+    display: flex;
+    font-size: 1.2rem;
+    height: 100vh;
+    width: 100%;
+    /* align-items: center; */
+}
+
+.image {
+    width: 60%;
+    max-height: 100vh;
+    background-image: url("./images/image.svg");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.login-box {
+    width: 40%;
+    height: max-content;
+    /* background-color: red; */
+    display: flex;
+    margin-top: 100px;
+    padding: 0 5%;
+    border-left: 3px solid rgb(86, 83, 83);
+    flex-direction: column;
+    /* justify-content: flex-end; */
+    /* text-align: center; */
+    row-gap: 10px;
+    height: 60vh;
+}
+
+.login-box span {
+    font-size: large;
+}
+
+.logo {
+    padding: 10px;
+    display: flex;
+    /* justify-content: center; */
+}
+
+.logo img {
+    max-width: 50%;
+}
+
+.buttons {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    row-gap: 20px;
+    width: 100%;
+    /* align-items: center; */
+
+}
+
+.button {
+    background-color: var(--buttonColor);
+    padding: 15px 3%;
+    border-radius: 20px;
+    width: 70%;
+    border: none;
+    cursor: pointer;
+    color: var(--color);
+
+}
+
+
+.buttons a:nth-child(2) button {
+    background-color: var(--colorBody);
+    border: 1px solid var(--buttonColor);
+}
+
+@media(max-width: 560px) {
+    .body {
+        flex-direction: column;
+    }
+
+    .logo {
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        padding: 20px;
+    }
+
+    .image {
+        width: 100%;
+        height: 50vh;
+        margin-top: 70px;
+    }
+
+    .login-box {
+        margin-top: 10px;
+        width: 100%;
+        align-items: center;
+        text-align: center;
+        padding: 10px;
+        border: none;
+    }
+
+    .buttons {
+        margin-top: 25px;
+        align-items: center;
+    }
+
+}
+
+/* Create account CSS */
+form
+{
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    margin-top: 30px;
+}
+form input
+{
+    background-color: var(--colorBody);
+    border:none;
+    border-bottom: 1px solid black;
+    padding: 5px 0;
+}
+input:focus
+{
+    border: none;
+    border-bottom: 1px solid red;
+
+}
