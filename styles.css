@@ -56,8 +56,9 @@ body {
     height: 60vh;
 }
 
-.login-box span {
+.login-box span p {
     font-size: large;
+    margin-top: 10px;
 }
 
 .logo {
@@ -94,7 +95,10 @@ body {
     transition: .3s;
 
 }
-
+.buttons a
+{
+    width: 100%;
+}
 
 .button:hover {
     background-color: var(--colorBody);
@@ -133,6 +137,7 @@ body {
     .buttons {
         margin-top: 25px;
         align-items: center;
+        row-gap: 10px;
     }
 
 }
