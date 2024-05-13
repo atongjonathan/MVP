@@ -89,13 +89,18 @@ body {
     border: none;
     cursor: pointer;
     color: var(--color);
+    color: white;
+    font-weight: 600;
+    transition: .3s;
 
 }
 
 
-.buttons a:nth-child(2) button {
+.button:hover {
     background-color: var(--colorBody);
     border: 1px solid var(--buttonColor);
+    /* color: var(--buttonColor); */
+    color: black;
 }
 
 @media(max-width: 560px) {
