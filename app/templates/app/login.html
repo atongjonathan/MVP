@@ -1,14 +1,18 @@
 {% extends 'app/auth_layout.html' %}
 {% block pageDiv %}
-<div class="login">
-    <span>
-        <p>Please login or sign up below</p>
-    </span>
-
-    <div class="buttons">
-        <a href="{% url 'login' %}"><button class="button" type="button">Log In</button></a>
-        <a href="{% url 'signup' %}"><button class="button" type="button">Sign Up</button></a>
-
+<div class="signup">
+    <div class="description">
+        <h2>Log In</h2>
     </div>
-</div>
-{% endblock %}
+    <div class="form">
+        {% if message %}
+        {{message}}
+        {% endif %}
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="username" id="" placeholder="Username">
+            <input type="password" name="password" id="" placeholder="Password">
+            <button type="submit" class="button">Log In</button>
+        </form>
+    </div>
+    {% endblock %}

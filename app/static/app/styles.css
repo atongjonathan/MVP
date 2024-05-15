@@ -155,7 +155,7 @@ form input
     background-color: var(--colorBody);
     border:none;
     border-bottom: 1px solid black;
-    padding: 5px 0;
+    padding: 10px;
 }
 input:focus
 {
