@@ -1,20 +1,159 @@
 {% extends 'app/auth_layout.html' %}
+
+
 {% block pageDiv %}
 <div class="signup">
     <div class="description">
         <h2>Create Account</h2>
     </div>
+    {% if message %}
+    <div class="alert">User Already exists</div>
+    {% endif %}
     <div class="form">
-        {% if message %}
-        <div class="alert">Already exists</div>
-        {% endif %}
-        <form action="{% url 'signup' %}" method="post">
+
+        <!-- <form action="{% url 'signup' %}" method="post">
             {% csrf_token %}
-            <input type="text" name="username" id="" placeholder="Username">
-            <input type="email" name="email" id="" placeholder="Email Address">
-            <input type="password" name="password" id="" placeholder="Password">
-            <input type="password" name="confirm" id="" placeholder="Confirm Password">
+            <input type="text" name="username" id="" placeholder="Username" required>
+            <input type="email" name="email" id="" placeholder="Email Address" required>
+            <input type="password" name="password" id="" placeholder="Password" required>
+            <input type="password" name="confirm" id="" placeholder="Confirm Password" required>
             <button type="submit" class="button">Sign Up</button>
+        </form> -->
+        <form id="form" action="{% url 'signup' %}" method="post">
+            {% csrf_token %}
+            <div class="form-flow">
+                <div class="group">
+                    <input type="text" name="username" id="username" placeholder="Username">
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error massege</small>
+                </div>
+
+            </div>
+            <div class="form-flow">
+                <div class="group">
+                    <input type="email" name="email" id="email" placeholder="Email Address">
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error massege</small>
+                </div>
+            </div>
+            <div class="form-flow">
+                <div class="group">
+                    <input type="password" name="password" id="password" placeholder="Password">
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error massege</small>
+                </div>
+            </div>
+            <div class="form-flow">
+                <div class="group">
+                    <input type="password" name="confirm" id="confirm" placeholder="Confirm Password">
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error massege</small>
+                </div>
+            </div>
+            <div class="form-flow">
+                <button type="submit" class="button">Sign Up</button>
+            </div>
         </form>
     </div>
-{% endblock %}
+    <div class="login">
+        <p><a href="{% url 'login' %}">Log in</a></p>
+    </div>
+
+    <script>
+        // Selecting elements
+        const form = document.querySelector("#form");
+        const userName = document.getElementById("username");
+        const email = document.getElementById("email");
+        const password = document.getElementById("password");
+        const password2 = document.getElementById("confirm");
+
+        // Event listener for form submission
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (formValidation()) {
+                form.submit();
+            }
+        });
+
+        // Form validation function
+        function formValidation() {
+            let isValid = true;
+
+            // Getting values from inputs
+            const userNameValue = userName.value.trim();
+            const emailValue = email.value.trim();
+            const passwordValue = password.value.trim();
+            const password2Value = password2.value.trim();
+
+            // Validate Username
+            if (userNameValue === '') {
+                errorValidation(userName, "Username cannot be blank");
+                isValid = false;
+            } else {
+                successValidation(userName);
+            }
+
+            // Validate Email
+            if (emailValue === '') {
+                errorValidation(email, "Email cannot be blank");
+                isValid = false;
+            } else if (!isValidEmail(emailValue)) {
+                errorValidation(email, "Invalid email format");
+                isValid = false;
+            } else {
+                successValidation(email);
+            }
+
+            // Validate Password
+            if (passwordValue === '') {
+                errorValidation(password, "Password cannot be blank");
+                isValid = false;
+            } else if (passwordValue.length < 8) {
+                errorValidation(password, "Password cannot be less than 8 characters");
+                isValid = false;
+            } else {
+                successValidation(password);
+            }
+
+            // Validate Confirm Password
+            if (password2Value === '') {
+                errorValidation(password2, "Password confirmation cannot be blank");
+                isValid = false;
+            } else if (password2Value !== passwordValue) {
+                errorValidation(password2, "Passwords do not match");
+                isValid = false;
+            } else {
+                successValidation(password2);
+            }
+
+            return isValid;
+        }
+
+        // Error validation function
+        function errorValidation(input, message) {
+            const formFlow = input.parentElement;
+            const small = formFlow.querySelector("small");
+            small.innerText = message;
+            formFlow.className = "form-flow error";
+        }
+
+        // Success validation function
+        function successValidation(input) {
+            const formFlow = input.parentElement;
+            const small = formFlow.querySelector("small");
+            small.innerText = "";
+            formFlow.className = "form-flow success";
+        }
+
+        // Email validation function
+        function isValidEmail(email) {
+            const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            console.log(re.test(email))
+            return re.test(email);
+        }
+    </script>
+    {% endblock %}

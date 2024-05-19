@@ -6,13 +6,19 @@
     </div>
     <div class="form">
         {% if message %}
-        {{message}}
+        <div class="alert">
+            {{message}}
+        </div>
+        
         {% endif %}
         <form action="{% url 'login' %}" method="post">
             {% csrf_token %}
-            <input type="text" name="username" id="" placeholder="Username">
-            <input type="password" name="password" id="" placeholder="Password">
+            <input type="text" name="username" id="" placeholder="Username" required>
+            <input type="password" name="password" id="" placeholder="Password" required>
             <button type="submit" class="button">Log In</button>
         </form>
+        <div class="login">
+            <p>Don't have an account ? <a href="{% url 'signup' %}">Sign Up</a></p>
+       </div>
     </div>
     {% endblock %}
